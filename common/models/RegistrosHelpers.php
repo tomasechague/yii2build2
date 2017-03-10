@@ -4,20 +4,20 @@ namespace common\models;
 
 use yii;
 
-class ResistrosHelpers{
-    
-    public static function userTiene($modelo_nombre){
+class ResistrosHelpers {
+
+    public static function userTiene($modelo_nombre) {
         $conexion = \Yii::$app->db;
         $userid = Yii::$app->user->identity->id;
         $sql = "SELECT id FROM $modelo_nombre WHERE user_id=:userid";
         $comando = $conexion->createCommand($sql);
         $comando->bindValue(":userid", $userid);
         $resultado = $comando->queryOne();
-        if($resultado == null){
+        if ($resultado == null) {
             return false;
-        }else{
+        } else {
             return $resultado['id'];
         }
     }
-    
+
 }
