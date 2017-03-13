@@ -4,7 +4,7 @@ namespace common\models;
 
 use yii;
 
-class ResistrosHelpers {
+class RegistrosHelpers {
 
     public static function userTiene($modelo_nombre) {
         $conexion = \Yii::$app->db;
