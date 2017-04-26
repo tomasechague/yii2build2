@@ -33,6 +33,21 @@ class PerfilController extends Controller
                   ],
               ],  
             ],
+            'access2'=> [
+              'class' => \yii\filters\AccessControl::className(),
+              'only'=> ['index','view', 'create', 'update','delete'],
+              'rules'=>[
+                  [
+                      'actions' => ['index','view','create','update','delete'],
+                      'allow'=> true,
+                      'roles'=>['@'],//significa que tiene que estar logueado
+                      'matchCallback'=>function($rule,$action){
+                            return PermisosHelpers::requerirEstado('Activo');
+                      }
+                  ],
+              ],  
+            ],
+            
             'verbs'=>[
                 'class'=> VerbFilter::className(),
                 'actions'=>[
@@ -106,6 +121,7 @@ class PerfilController extends Controller
      */
     public function actionUpdate($id)
     {
+        PermisosHelpers::requerirUpgrade('Pago');
         if($model = Perfil::find()->where(['user_id' => Yii::$app->user->identity->id])->one()){
             if($model->load(Yii::$app->request->post()) && $model->save()){
                 return $this->redirect(['view']);
