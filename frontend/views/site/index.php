@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
+//Me tengo que importar la bbdd
 
 $this->title = 'My Yii Application';
 ?>
